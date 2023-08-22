@@ -1,4 +1,6 @@
 [core]
     remote = myremote
+[hydra]
+    enabled = False
 ['remote "myremote"']
     url = /tmp/dvcstore

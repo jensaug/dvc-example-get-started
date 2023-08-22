@@ -13,11 +13,11 @@ stages:
     params:
       params.yaml:
         prepare.seed: 20170428
-        prepare.split: 0.25
+        prepare.split: 0.12
     outs:
     - path: data/prepared
       hash: md5
-      md5: f1588b397483387838adbface43c3911.dir
+      md5: e4ba8bed343f342624badd8de2727ba6.dir
       size: 23861319
       nfiles: 2
   featurize:
@@ -25,7 +25,7 @@ stages:
     deps:
     - path: data/prepared
       hash: md5
-      md5: f1588b397483387838adbface43c3911.dir
+      md5: e4ba8bed343f342624badd8de2727ba6.dir
       size: 23861319
       nfiles: 2
     - path: src/featurization.py
@@ -38,16 +38,16 @@ stages:
     outs:
     - path: data/features
       hash: md5
-      md5: fab66c933966931fbb7edf7852f2f912.dir
-      size: 7083809
+      md5: 03fc1a563ce8614d7ebdb52de3b7560f.dir
+      size: 7083005
       nfiles: 2
   train:
     cmd: python src/train.py data/features model.pkl
     deps:
     - path: data/features
       hash: md5
-      md5: fab66c933966931fbb7edf7852f2f912.dir
-      size: 7083809
+      md5: 03fc1a563ce8614d7ebdb52de3b7560f.dir
+      size: 7083005
       nfiles: 2
     - path: src/train.py
       md5: 3ffc5530112ca028ac61a3c8efeb0516
@@ -60,33 +60,33 @@ stages:
     outs:
     - path: model.pkl
       hash: md5
-      md5: f60260e220c9751433f9f3dbf49cbf2b
-      size: 4957560
+      md5: 76bcdf28f9f33f6e9777aefe82ee3923
+      size: 6021729
   evaluate:
     cmd: python src/evaluate.py model.pkl data/features scores.json prc.json roc.json
     deps:
     - path: data/features
       hash: md5
-      md5: fab66c933966931fbb7edf7852f2f912.dir
-      size: 7083809
+      md5: 03fc1a563ce8614d7ebdb52de3b7560f.dir
+      size: 7083005
       nfiles: 2
     - path: model.pkl
       hash: md5
-      md5: f60260e220c9751433f9f3dbf49cbf2b
-      size: 4957560
+      md5: 76bcdf28f9f33f6e9777aefe82ee3923
+      size: 6021729
     - path: src/evaluate.py
       md5: 16a56ad9df4476e6d3b76a64fe46dbcc
       size: 1483
     outs:
     - path: prc.json
       hash: md5
-      md5: e3370a46019927b3316ef774e52d560b
-      size: 7446
+      md5: e86dfd3ff7187fb13adbcd3cbcbc1453
+      size: 6372
     - path: roc.json
       hash: md5
-      md5: 8808c447a44f34284a20847305dcde94
-      size: 7116
+      md5: 56bf2aae9247797d941d627670ff7a7b
+      size: 5681
     - path: scores.json
       hash: md5
-      md5: 5fbf68813176f4a5b3b1e662221a893b
-      size: 73
+      md5: bc0bb238b9c29e43e2c1c499e92fece1
+      size: 72
